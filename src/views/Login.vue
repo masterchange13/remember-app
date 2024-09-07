@@ -53,10 +53,10 @@ import { userStore } from "@/stores";
 import { ref } from "vue";
 
 const form = ref({
-  phone: "",
-  user_name: "",
-  password: "",
-  conform_password: "",
+  phone: "12345678901",
+  user_name: "12345678901",
+  password: "12345678901",
+  conform_password: "12345678901",
 });
 const is_login = ref(true);
 const loading = ref(false);
@@ -64,6 +64,7 @@ const store = userStore();
 const router = useRouter();
 
 const submitForm = async () => {
+  console.log("submitForm");
   let { value: user } = form;
   if (!user.phone || !user.password) {
     return ElMessage({
@@ -92,28 +93,38 @@ const submitForm = async () => {
     }
   }
   try {
+    console.log("Starting form submission...");
     loading.value = true;
+
     if (is_login.value) {
+      console.log("Attempting login with user:", user);
       await store.login(user);
+      console.log("Login successful, navigating to /");
       setTimeout(() => {
         router.push("/");
-      }, 500);
+      }, 500);    
+      console.log("Navigated to /");
     } else {
+      console.log("Attempting registration with user:", user);
       await store.register(user);
     }
+
     loading.value = false;
+    console.log("Operation successful");
     ElMessage({
       type: "success",
       message: is_login.value ? "登录成功" : "注册成功",
     });
-  } catch (errer: any) {
+  } catch (error: any) {
+    console.error("An error occurred:", error);
     loading.value = false;
     ElMessage({
       type: "error",
-      message: errer || "错误",
+      message: error.message || "错误",
     });
   }
 };
+
 </script>
 <style lang="less">
 .login-page {
