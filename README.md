@@ -1,6 +1,6 @@
-# vue3-memo
+# remember-app
 
-This template should help get you started developing with Vue 3 in Vite.
+### 记事本app，使用electron-vue3开发，使用vite构建，旨在创建一个跨平台的记事本应用。
 
 ## Recommended IDE Setup
 
@@ -38,3 +38,13 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### if you want to make it as a standalone app
+
+```sh
+
+```
+
+## License
+
+[MIT](LICENSE) License © 2022 [zhangxu](https://github.com/zhangxu0406)
